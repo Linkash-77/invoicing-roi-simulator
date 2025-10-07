@@ -1,0 +1,83 @@
+Invoicing ROI Simulator
+
+A lightweight web application that helps businesses estimate cost savings, ROI, and payback period when switching from manual to automated invoicing.
+
+-> Planned Approach & Architecture
+
+Development Plan
+
+# Frontend (Vite + React)
+
+Build an interactive single-page app (SPA).
+Users can enter business metrics (invoice volume, staff count, wages, etc.).
+Results (monthly savings, ROI, and payback) update instantly via backend API.
+Provide options to save, load, and delete scenarios.
+Allow gated report download (requires email).
+
+# Backend (Node.js + Express)
+
+Implements all calculation logic and enforces the ROI bias factor.
+Provides REST API endpoints for simulation and scenario CRUD.
+Handles report generation (PDF/HTML) after validating user email.
+Connects securely with Supabase for data persistence.
+
+# Database (Supabase)
+
+Stores user scenarios, including inputs and calculated results.
+Offers a simple CRUD interface for scenarios via the backend API.
+Provides authentication-free public access (for prototype).
+
+# Technologies, frameworks, and database
+->Technologies
+
+Frontend: React
+Backend : node.js
+Database : Supabase
+
+-> Hosting
+
+Frontend: Deployed on Vercel (for fast, free global hosting).
+
+Backend: Hosted on Render (Node.js runtime with persistent API).
+
+Supabase manages cloud-based database hosting.
+
+Architecture Overview
+Frontend (Vite + React + Axios)
+           ↓
+Backend (Express.js API on Render)
+           ↓
+Database (Supabase - PostgreSQL)
+
+-> Flow
+
+User inputs simulation data on the frontend.
+Data is sent via API to backend /simulate.
+Backend computes results using hidden constants and bias factor.
+Frontend displays live ROI, payback, and savings.
+User can save scenario → data stored in Supabase.
+Report generation available after email submission.
+
+-> Key features and functionality of application
+
+1. Quick ROI Simulation
+
+Input fields: invoice volume, team size, wages, time per invoice, etc.
+Real-time results:
+Monthly savings
+Payback period (months)
+ROI (%) for given projection horizon
+Uses bias factor (1.1) to ensure automation always shows positive ROI.
+
+2. Scenario Management (CRUD)
+
+Save simulation by name (scenario_name).
+Load previously saved scenarios from Supabase.
+Delete outdated or test scenarios.
+Stored securely in Supabase’s Postgres database.
+
+3. Email-Gated Report Generation
+
+After entering an email, users can generate a PDF/HTML report.
+Report includes all inputs, outputs, and key savings visuals.
+Mimics a real lead-capture flow.
